@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Subject}}</title>
+</head>
+
+<body style="font-family: Helvetica, Arial, sans-serif; margin: 0px; padding: 0px; background-color: #ffffff;">
+    <table role="presentation"
+        style="width: 100%; border-collapse: collapse; border: 0px; border-spacing: 0px; font-family: Arial, Helvetica, sans-serif; background-color: rgb(239, 239, 239);">
+        <tbody>
+            <tr>
+                <td align="center" style="padding: 1rem 2rem; vertical-align: top; width: 100%;">
+                    <table role="presentation"
+                        style="max-width: 600px; border-collapse: collapse; border: 0px; border-spacing: 0px; text-align: left;">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 40px 0px 0px;">
+                                    <div style="padding: 20px; background-color: rgb(255, 255, 255);">
+                                        <div style="color: rgb(0, 0, 0); text-align: left;">
+                                            <h1 style="margin: 1rem 0">{{.Subject}}</h1>
+                                            <br style="padding-bottom: 16px">Xin chào {{.UserName}},<br>Chúng tôi xin
+                                            thông báo tài khoản của bạn đã được đăng ký thành công trên
+                                            hệ thống quản lý homestay HBooking. Dưới đây là thông tin chi tiết về tài
+                                            khoản của bạn:</p>
+                                            <p style="padding-bottom: 16px; padding-left: 5%;">
+                                                Tài khoản: {{.UserName}}</br>
+                                                Mật khẩu: {{.Password}}
+                                            </p>
+                                            <p style="padding-bottom: 16px">Chúng tôi rất vui mừng và
+                                                hy vọng HBooking sẽ mang lại cho bạn trải nghiệm quản lý homestay
+                                                hiệu
+                                                quả và tiện lợi.</p>
+                                            <p style="padding-bottom: 16px">Trân trọng,<br>HBooking Team</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+Name: hbooking-api
+Host: 0.0.0.0
+Port: 8888
+Auth:
+  AccessSecret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+  AccessExpire: 604800
+  RefreshExpire: 6048000
+DataSource: root:hbooking@tcp(mysql_db:3306)/hbooking
+SMTPConfig:
+  ClientOrigin: http://localhost:8888/hbooking
+  # EmailFrom: buiha.dev@gmail.com
+  # SMTPHost: smtp.gmail.com
+  # SMTPUser: ducanhnguyen478@gmail.com
+  # SMTPPass: kzie widk wvrn nvzw
+  # SMTPPort: 587
+  EmailFrom: admin@hbooking.com
+  SMTPHost: sandbox.smtp.mailtrap.io
+  SMTPUser: 72721ec65fcc84
+  SMTPPass: 697ec3311670ae
+  SMTPPort: 587
+CloudinaryConfig:
+  # CLOUDINARY_URL=cloudinary://562289264945973:D8205HsFINfISmjm-I_l3gr4E3Q@djyssz3i6
+  CloudName: 'djyssz3i6'
+  APIKey: '562289264945973'   
+  APISecret: 'D8205HsFINfISmjm-I_l3gr4E3Q'
+  StorageUrl: 'https://res.cloudinary.com/djyssz3i6/image/upload'

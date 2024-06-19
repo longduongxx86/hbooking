@@ -1,0 +1,20 @@
+export const STATUS_CODE = {
+  NOT_FOUND: 404,
+};
+
+export const RESPONSE_CODE = {
+  SUCCESS: 0,
+};
+
+export const ENTITY_TYPE = {
+  ENTITY_TYPE_USER: 1,
+  ENTITY_TYPE_ROOM: 2,
+  ENTITY_TYPE_HOMESTAY: 3,
+  ENTITY_TYPE_SERVICE: 4,
+  ENTITY_TYPE_BOOKING: 5,
+  ENTITY_TYPE_PHOTO: 6,
+} as const;
+
+export const LIMIT_DEFAULT = 8;
+
+export const OFFSET_DEFAULT = 0;

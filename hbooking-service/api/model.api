@@ -1,0 +1,124 @@
+info (
+	title:   "hbooking service models"
+	author:  "ducanhng.dev"
+	email:   "ducanhng.dev@gmail.com"
+	version: "1.0"
+)
+
+type (
+	User {
+		UserId      int64  `json:"user_id"`
+		UserName    string `json:"user_name"`
+		Email       string `json:"email"`
+		PhoneNumber string `json:"phone_number"`
+		Gender      int    `json:"gender"`
+		FullName    string `json:"full_name"`
+		Avatar      string `json:"avatar"`
+		IsVerified  bool   `json:"is_verified"`
+		Role        int    `json:"role"`
+		CreatedAt   int64  `json:"created_at"`
+		UpdatedAt   int64  `json:"updated_at"`
+	}
+)
+
+type (
+	Homestay {
+		HomestayId  int64   `json:"homestay_id"`
+		UserId      int64   `json:"user_id"`
+		Name        string  `json:"name"`
+		Description string  `json:"description"`
+		Photos      []Photo `json:"photos"`
+		Ward        int     `json:"ward"`
+		District    int     `json:"district"`
+		Province    int     `json:"province"`
+		CreatedAt   int64   `json:"created_at"`
+		UpdatedAt   int64   `json:"updated_at"`
+	}
+)
+
+type (
+	Room {
+		RoomID    int64    `json:"room_id"`
+		Homestay  Homestay `json:"homestay"`
+		RoomName  string   `json:"room_name"`
+		RoomType  int      `json:"room_type"`
+		Photos    []Photo  `json:"photos"`
+		Price     float64  `json:"price"`
+		Status    int      `json:"status"`
+		CreatedAt int64    `json:"created_at"`
+		UpdatedAt int64    `json:"updated_at"`
+	}
+)
+
+type (
+	UserRoom {
+		UserRoomID int64 `json:"user_room_id"`
+		UserID     int64 `json:"user_id"`
+		HomestayID int64 `json:"homestay_id"`
+		CreatedAt  int64 `json:"created_at"`
+		UpdatedAt  int64 `json:"updated_at"`
+	}
+)
+type (
+	Booking {
+		BookingID    int64   `json:"booking_id"`
+		User         User    `json:"user"`
+		Room         Room    `json:"room"`
+		CheckInDate  int64   `json:"check_in_date"`
+		CheckOutDate int64   `json:"check_out_date"`
+		DepositPrice float64 `json:"deposit_price"`
+		TotalPrice   float64 `json:"total_price"`
+		Status       int     `json:"status"`
+		CreatedAt    int64   `json:"created_at"`
+		UpdatedAt    int64   `json:"updated_at"`
+	}
+)
+
+type (
+	Service {
+		ServiceID   int64   `json:"service_id"`
+		ServiceName string  `json:"service_name"`
+		Description string  `json:"description"`
+		Price       float64 `json:"price"`
+		CreatedAt   int64   `json:"created_at"`
+		UpdatedAt   int64   `json:"updated_at"`
+	}
+)
+
+type (
+	Review {
+		ReviewID   int64  `json:"review_id"`
+		UserID     int64  `json:"user_id"`
+		HomestayID int64  `json:"homestay_id"`
+		Rate       int    `json:"rate"`
+		Comment    string `json:"comment"`
+		CreatedAt  int64  `json:"created_at"`
+		UpdatedAt  int64  `json:"updated_at"`
+	}
+)
+
+type (
+	Photo {
+		PhotoID    int64  `json:"photo_id"`
+		EntityId   int64  `json:"entity_id"`
+		Url        string `json:"url"`
+		EntityType int    `json:"entity_type"`
+		CreatedAt  int64  `json:"created_at"`
+		UpdatedAt  int64  `json:"updated_at"`
+	}
+)
+
+type (
+	RevenueBreakdown {
+		Day     int     `json:"day,optional"`
+		Month   int     `json:"month,optional"`
+		Year    int     `json:"year,optional"`
+		Revenue float64 `json:"revenue,optional"`
+	}
+	Revenue {
+		Homestays         []Homestay         `json:"homestays"`
+		User              User               `json:"user"`
+		TotalRevenue      float64            `json:"total_revenue"`
+		RevenueBreakdowns []RevenueBreakdown `json:"revenue_breakdowns"`
+	}
+)

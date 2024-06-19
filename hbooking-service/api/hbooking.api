@@ -1,0 +1,839 @@
+info (
+	title:   "hbooking service api"
+	author:  "ducanhng.dev"
+	email:   "ducanhng.dev@gmail.com"
+	version: "1.0"
+)
+
+import "model.api"
+
+type (
+	// request Login API
+	// return jwt auth-token use for other API
+	LoginReq {
+		UserName string `json:"user_name"` // user_name
+		Password string `json:"password"`  //  password
+	}
+	LoginData {
+		User  User   `json:"user"`  // Account info
+		Token string `json:"token"` // jwt token for api
+	}
+	LoginRes {
+		Code    int       `json:"code"`    //    Result code: 0 is success. Otherwise, getting an error
+		Message string    `json:"message"` // Result message: detail response code
+		Data    LoginData `json:"data"`
+	}
+)
+
+type (
+	// request Login API
+	// return jwt auth-token use for other API
+	RegisterReq {
+		UserName    string `json:"user_name"`
+		Password    string `json:"password"`
+		Email       string `json:"email"`
+		PhoneNumber string `json:"phone_number"`
+		FullName    string `json:"full_name"`
+		Gender      int    `json:"gender"` // 1: male, 2: female, 4: other
+	}
+	RegisterData {
+		User  User   `json:"user"`  // Account info
+		Token string `json:"token"` // jwt token for api
+	}
+	RegisterRes {
+		Code    int          `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string       `json:"message"` // Result message: detail response code
+		Data    RegisterData `json:"data"`
+	}
+)
+
+type (
+	ForgetPasswordReq {
+		UserName string `json:"user_name,optional"`
+		Email    string `json:"email,optional"`
+	}
+	ForgetPasswordRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+type (
+	VerifyEmailNoAuthReq {
+		Email string `form:"email"`
+		Token string `form:"token"`
+	}
+	VerifyEmailNoAuthRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+type (
+	VerifyEmailReq {
+		Email string `form:"email"`
+		Token string `form:"token"`
+	}
+	VerifyEmailRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+type (
+	ResetPasswordReq {
+		UserName string `json:"user_name"`
+		Password string `json:"password"`
+	}
+	ResetPasswordRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+// type (
+// 	LogoutReq { //  1: Ios, 2: Android, 4: Web
+// 		AccountID  int64 `path:"account_id"`
+// 	}
+
+// 	LogoutRes {
+// 		Code    int    `json:"code"` //    Result code: 0 is success. Otherwise, getting an error
+// 		Message string `json:"message"` // Result message: detail response code
+// 	}
+// )
+
+type (
+	GetUserReq {
+		UserId int64 `path:"user_id"`
+	}
+	GetUserData {
+		User User `json:"user"`
+	}
+	GetUserRes {
+		Code    int         `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string      `json:"message"` // Result message: detail response code
+		Data    GetUserData `json:"data"`
+	}
+)
+
+type (
+	GetUsersReq {
+		Email  string `form:"email,optional"`
+		Limit  int    `form:"limit"`  // number order per page limit = 0 get all
+		Offset int    `form:"offset"` // offset of page
+	}
+	GetUsersData {
+		Users []User `json:"users"`
+	}
+	GetUsersRes {
+		Code    int          `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string       `json:"message"` // Result message: detail response code
+		Data    GetUsersData `json:"data"`
+	}
+)
+
+type (
+	UpdateUserReq {
+		UserId      int64  `path:"user_id"`
+		PhoneNumber string `form:"phone_number"`
+		Gender      int    `form:"gender"`
+		FullName    string `form:"full_name"`
+	}
+	UpdateUserData {
+		User User `json:"user"`
+	}
+	UpdateUserRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    UpdateUserData `json:"data"`
+	}
+)
+
+// Homestay APIs
+
+type (
+	AddHomestayReq {
+		Name        string `form:"name"`
+		UserId      int64  `form:"user_id"`
+		Description string `form:"description"`
+		Ward        int    `form:"ward"`
+		District    int    `form:"district"`
+		Province    int    `form:"province"`
+	}
+	AddHomestayData {
+		Homestay Homestay `json:"homestay"`
+	}
+	AddHomestayRes {
+		Code    int             `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string          `json:"message"` // Result message: detail response code
+		Data    AddHomestayData `json:"data"`
+	}
+)
+
+type (
+	GetHomestayReq {
+		HomestayId int64 `path:"homestay_id"`
+	}
+	GetHomestayData {
+		Homestay Homestay `json:"homestay"`
+	}
+	GetHomestayRes {
+		Code    int             `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string          `json:"message"` // Result message: detail response code
+		Data    GetHomestayData `json:"data"`
+	}
+)
+
+type (
+	GetHomestaysReq {
+		Name     string `form:"name,optional"`
+		Ward     int    `form:"ward,optional"`
+		District int    `form:"district,optional"`
+		Province int    `form:"province,optional"`
+		Limit    int    `form:"limit,optional"`  // number order per page limit = 0 get all
+		Offset   int    `form:"offset,optional"` // offset of page
+	}
+	GetHomestaysData {
+		Homestays []Homestay `json:"homestays"`
+	}
+	GetHomestaysRes {
+		Code    int              `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string           `json:"message"` // Result message: detail response code
+		Data    GetHomestaysData `json:"data"`
+	}
+)
+
+type (
+	UpdateHomestayReq {
+		HomestayId  int64  `path:"homestay_id"`
+		UserId      int64  `json:"user_id"`
+		Name        string `json:"name"`
+		Description string `json:"description"`
+		Ward        int    `json:"ward"`
+		District    int    `json:"district"`
+		Province    int    `json:"province"`
+	}
+	UpdateHomestayData {
+		Homestay Homestay `json:"homestay"`
+	}
+	UpdateHomestayRes {
+		Code    int                `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string             `json:"message"` // Result message: detail response code
+		Data    UpdateHomestayData `json:"data"`
+	}
+)
+
+type (
+	DeleteHomestayReq {
+		HomestayId int64 `path:"homestay_id"`
+	}
+	DeleteHomestayRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+// Service APIs
+
+type (
+	AddServiceReq {
+		ServiceName string  `json:"service_name"`
+		Description string  `json:"description"`
+		Price       float64 `json:"price"`
+	}
+	AddServiceData {
+		Service Service `json:"service"`
+	}
+	AddServiceRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    AddServiceData `json:"data"`
+	}
+)
+
+type (
+	GetServiceReq {
+		ServiceId int64 `path:"service_id"`
+	}
+	GetServiceData {
+		Service Service `json:"service"`
+	}
+	GetServiceRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    GetServiceData `json:"data"`
+	}
+)
+
+type (
+	GetServicesReq {
+		ServiceName string  `form:"service_name,optional"`
+		PriceFrom   float64 `form:"price_from,optional"`
+		PriceTo     float64 `form:"price_to,optional"`
+		Limit       int     `form:"limit,optional"`  // number order per page limit = 0 get all
+		Offset      int     `form:"offset,optional"` // offset of page
+	}
+	GetServicesData {
+		Services []Service `json:"services"`
+	}
+	GetServicesRes {
+		Code    int             `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string          `json:"message"` // Result message: detail response code
+		Data    GetServicesData `json:"data"`
+	}
+)
+
+type (
+	UpdateServiceReq {
+		ServiceId   int64  `path:"service_id"`
+		ServiceName string `json:"service_name"`
+		Description string `json:"description"`
+		Price       int    `json:"price"`
+	}
+	UpdateServiceData {
+		Service Service `json:"service"`
+	}
+	UpdateServiceRes {
+		Code    int               `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string            `json:"message"` // Result message: detail response code
+		Data    UpdateServiceData `json:"data"`
+	}
+)
+
+type (
+	DeleteServiceReq {
+		ServiceId int64 `path:"service_id"`
+	}
+	DeleteServiceRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+// Review APIs
+
+type (
+	AddReviewReq {
+		UserId     int    `json:"user_id"`
+		HomestayId string `json:"homestay_id"`
+		Rate       int    `json:"rate"` // max 5
+		Comment    string `json:"comment"`
+	}
+	AddReviewData {
+		Review Review `json:"review"`
+	}
+	AddReviewRes {
+		Code    int           `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string        `json:"message"` // Result message: detail response code
+		Data    AddReviewData `json:"data"`
+	}
+)
+
+type (
+	GetReviewReq {
+		ReviewId int64 `path:"review_id"`
+	}
+	GetReviewData {
+		Review Review `json:"review"`
+	}
+	GetReviewRes {
+		Code    int           `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string        `json:"message"` // Result message: detail response code
+		Data    GetReviewData `json:"data"`
+	}
+)
+
+type (
+	GetReviewsByHomestayIdReq {
+		HomestayId int64 `path:"homestay_id"`
+		Limit      int   `form:"limit,optional"`  // number order per page limit = 0 get all
+		Offset     int   `form:"offset,optional"` // offset of page
+	}
+	UserOfReview {
+		UserId   int64  `json:"user_id"`
+		FullName string `json:"username"`
+		Avatar   string `json:"avatar"`
+	}
+	ReviewsByHomestayId {
+		ReviewID   int64        `json:"review_id"`
+		User       UserOfReview `json:"user"`
+		HomestayID int64        `json:"homestay_id"`
+		Rate       int          `json:"rate"`
+		Comment    string       `json:"comment"`
+		CreatedAt  int64        `json:"created_at"`
+		UpdatedAt  int64        `json:"updated_at"`
+	}
+	GetReviewsByHomestayIdData {
+		Reviews []ReviewsByHomestayId `json:"reviews"`
+	}
+	GetReviewsByHomestayIdRes {
+		Code    int                        `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string                     `json:"message"` // Result message: detail response code
+		Data    GetReviewsByHomestayIdData `json:"data"`
+	}
+)
+
+type (
+	UpdateReviewReq {
+		ReviewId int64  `path:"service_id"`
+		Rate     int    `json:"rate"` // max 5
+		Comment  string `json:"comment"`
+	}
+	UpdateReviewData {
+		Review Review `json:"review"`
+	}
+	UpdateReviewRes {
+		Code    int              `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string           `json:"message"` // Result message: detail response code
+		Data    UpdateReviewData `json:"data"`
+	}
+)
+
+type (
+	DeleteReviewReq {
+		ReviewId int64 `path:"service_id"`
+	}
+	DeleteReviewRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+// Booking APIs
+
+type (
+	AddBookingReq {
+		UserId       int64   `json:"user_id"`
+		RoomId       int64   `json:"room_id"`
+		CheckInDate  int64   `json:"check_in_date"`
+		CheckOutDate int64   `json:"check_out_date"`
+		DepositPrice float64 `json:"deposit_price"`
+		TotalPrice   float64 `json:"total_price"`
+		Status       int     `json:"status"`
+	}
+	AddBookingData {
+		Booking Booking `json:"booking"`
+	}
+	AddBookingRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    AddBookingData `json:"data"`
+	}
+)
+
+type (
+	GetBookingReq {
+		BookingId int64 `path:"booking_id"`
+	}
+	GetBookingData {
+		Booking Booking `json:"booking"`
+	}
+	GetBookingRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    GetBookingData `json:"data"`
+	}
+)
+
+type (
+	GetBookingsReq {
+		RoomId       int64 `form:"room_id,optional"`
+		UserId       int64 `form:"user_id,optional"`
+		CheckInDate  int64 `form:"check_in_date,optional"`
+		CheckOutDate int64 `form:"check_out_date,optional"`
+		Limit        int   `form:"limit,optional"`  // number order per page limit = 0 get all
+		Offset       int   `form:"offset,optional"` // offset of page
+	}
+	GetBookingsData {
+		Bookings []Booking `json:"bookings"`
+	}
+	GetBookingsRes {
+		Code    int             `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string          `json:"message"` // Result message: detail response code
+		Data    GetBookingsData `json:"data"`
+	}
+)
+
+type (
+	UpdateBookingReq {
+		BookingId    int64   `path:"booking_id"`
+		UserId       int64   `json:"user_id"`
+		RoomId       int64   `json:"room_id"`
+		CheckInDate  int64   `json:"check_in_date"`
+		CheckOutDate int64   `json:"check_out_date"`
+		DepositPrice float64 `json:"deposit_price"`
+		TotalPrice   float64 `json:"total_price"`
+		Status       int     `json:"status"`
+	}
+	UpdateBookingData {
+		Booking Booking `json:"booking"`
+	}
+	UpdateBookingRes {
+		Code    int               `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string            `json:"message"` // Result message: detail response code
+		Data    UpdateBookingData `json:"data"`
+	}
+)
+
+type (
+	DeleteBookingReq {
+		BookingId int64 `path:"booking_id"`
+	}
+	DeleteBookingRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+// Room APIs
+type (
+	AddRoomReq {
+		HomestayID int64   `form:"homestay_id"`
+		RoomName   string  `form:"room_name"`
+		RoomType   int     `form:"room_type,options=1|2"`
+		Price      float64 `form:"price"`
+		Status     int     `form:"status"`
+	}
+	AddRoomData {
+		Room Room `json:"room"`
+	}
+	AddRoomRes {
+		Code    int         `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string      `json:"message"` // Result message: detail response code
+		Data    AddRoomData `json:"data"`
+	}
+)
+
+type (
+	GetRoomReq {
+		RoomId int64 `path:"room_id"`
+	}
+	GetRoomData {
+		Room Room `json:"room"`
+	}
+	GetRoomRes {
+		Code    int         `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string      `json:"message"` // Result message: detail response code
+		Data    GetRoomData `json:"data"`
+	}
+)
+
+type (
+	GetRoomsReq {
+		RoomName  string  `form:"room_name,optional"`
+		RoomType  int     `form:"room_type,optional"`
+		PriceFrom float64 `form:"price_from,optional"`
+		PriceTo   float64 `form:"price_to,optional"`
+		Status    int     `form:"status,optional"`
+		Limit     int     `form:"limit,optional"`  // number order per page limit = 0 get all
+		Offset    int     `form:"offset,optional"` // offset of page
+	}
+	GetRoomsData {
+		Rooms []Room `json:"rooms"`
+	}
+	GetRoomsRes {
+		Code    int          `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string       `json:"message"` // Result message: detail response code
+		Data    GetRoomsData `json:"data"`
+	}
+)
+
+type (
+	UpdateRoomReq {
+		RoomId     int64   `path:"room_id"`
+		HomestayID int64   `json:"homestay_id"`
+		RoomName   string  `json:"room_name"`
+		RoomType   int     `json:"room_type,options=1|2"`
+		Price      float64 `json:"price"`
+		Status     int     `json:"status"`
+	}
+	UpdateRoomData {
+		Room Room `json:"room"`
+	}
+	UpdateRoomRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    UpdateRoomData `json:"data"`
+	}
+)
+
+type (
+	DeleteRoomReq {
+		RoomId int64 `path:"room_id"`
+	}
+	DeleteRoomRes {
+		Code    int    `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string `json:"message"` // Result message: detail response code
+	}
+)
+
+type (
+	UpdatePhotosReq {
+		EntityId       int64  `form:"entity_id"`
+		EntityType     int    `form:"entity_type"`
+		DeletePhotoIds string `form:"delete_photo_ids,optional"` // list of photo id use to delete
+	}
+	UpdatePhotosData {
+		Photos []Photo `json:"photos"`
+	}
+	UpdatePhotosRes {
+		Code    int              `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string           `json:"message"` // Result message: detail response code
+		Data    UpdatePhotosData `json:"data"`
+	}
+)
+
+// Report APIs
+type (
+	GetRevenueReq {
+		HomestayIds string `form:"homestay_ids,optional"`
+		UserId      int64  `form:"user_id,optional"`
+		From        int64  `form:"from,optional"`
+		To          int64  `form:"to,optional"`
+		By          int    `form:"by"`   // 1: homestay_id, 2: user_id
+		Mode        int    `form:"mode"` // 1: day, 2: month, 3: year
+	}
+	GetRevenueData {
+		Revenue Revenue `json:"revenue"`
+	}
+	GetRevenueRes {
+		Code    int            `json:"code"`    // Result code: 0 is success. Otherwise, getting an error
+		Message string         `json:"message"` // Result message: detail response code
+		Data    GetRevenueData `json:"data"`
+	}
+)
+
+@server (
+	prefix: /hbooking
+)
+service hbooking-api {
+	@doc(
+		summary: "Login"
+	)
+	@handler Login
+	post /user/login (LoginReq) returns (LoginRes)
+
+	@doc(
+		summary: "Register"
+	)
+	@handler Register
+	post /user/register (RegisterReq) returns (RegisterRes)
+
+	@doc(
+		summary: "ForgetPassword"
+	)
+	@handler ForgetPassword
+	post /user/forget-password (ForgetPasswordReq) returns (ForgetPasswordRes)
+
+	@doc(
+		summary: "VerifyEmailNoAuth"
+	)
+	@handler VerifyEmailNoAuth
+	get /verify-email (VerifyEmailNoAuthReq) returns (VerifyEmailNoAuthRes)
+}
+
+@server (
+	jwt:        Auth
+	prefix:     /hbooking
+)
+service hbooking-api {
+
+	@doc(
+		summary: "VerifyEmail"
+	)
+	@handler VerifyEmail
+	get /user/verify-email (VerifyEmailReq) returns (VerifyEmailRes)
+
+	@doc(
+		summary: "ResetPassword"
+	)
+	@handler ResetPassword
+	post /user/reset-password (ResetPasswordReq) returns (ResetPasswordRes)
+
+	@doc(
+		summary: "GetUser"
+	)
+	@handler GetUser
+	get /user/:user_id (GetUserReq) returns (GetUserRes)
+
+	@doc(
+		summary: "GetUsers"
+	)
+	@handler GetUsers
+	get /user (GetUsersReq) returns (GetUsersRes)
+
+	@doc(
+		summary: "UpdateUser"
+	)
+	@handler UpdateUser
+	put /user/:user_id (UpdateUserReq) returns (UpdateUserRes)
+
+	@doc(
+		summary: "AddHomestay"
+	)
+	@handler AddHomestay
+	post /homestay (AddHomestayReq) returns (AddHomestayRes)
+
+	@doc(
+		summary: "GetHomestay"
+	)
+	@handler GetHomestay
+	get /homestay/:homestay_id (GetHomestayReq) returns (GetHomestayRes)
+
+	@doc(
+		summary: "GetHomestays"
+	)
+	@handler GetHomestays
+	get /homestay (GetHomestaysReq) returns (GetHomestaysRes)
+
+	@doc(
+		summary: "UpdateHomestay"
+	)
+	@handler UpdateHomestay
+	put /homestay/:homestay_id (UpdateHomestayReq) returns (UpdateHomestayRes)
+
+	@doc(
+		summary: "DeleteHomestay"
+	)
+	@handler DeleteHomestay
+	delete /homestay/:homestay_id (DeleteHomestayReq) returns (DeleteHomestayRes)
+
+	@doc(
+		summary: "AddService"
+	)
+	@handler AddService
+	post /service (AddServiceReq) returns (AddServiceRes)
+
+	@doc(
+		summary: "GetService"
+	)
+	@handler GetService
+	get /service/:service_id (GetServiceReq) returns (GetServiceRes)
+
+	@doc(
+		summary: "GetServices"
+	)
+	@handler GetServices
+	get /service (GetServicesReq) returns (GetServicesRes)
+
+	@doc(
+		summary: "UpdateService"
+	)
+	@handler UpdateService
+	put /service/:service_id (UpdateServiceReq) returns (UpdateServiceRes)
+
+	@doc(
+		summary: "DeleteService"
+	)
+	@handler DeleteService
+	delete /service/:service_id (DeleteServiceReq) returns (DeleteServiceRes)
+
+	@doc(
+		summary: "AddReview"
+	)
+	@handler AddReview
+	post /review (AddReviewReq) returns (AddReviewRes)
+
+	@doc(
+		summary: "GetReview"
+	)
+	@handler GetReview
+	get /review/:review_id (GetReviewReq) returns (GetReviewRes)
+
+	@doc(
+		summary: "GetReviewsByHomestayId"
+	)
+	@handler GetReviewsByHomestayId
+	get /homestay/:homestay_id/review (GetReviewsByHomestayIdReq) returns (GetReviewsByHomestayIdRes)
+
+	@doc(
+		summary: "UpdateReview"
+	)
+	@handler UpdateReview
+	put /review/:review_id (UpdateReviewReq) returns (UpdateReviewRes)
+
+	@doc(
+		summary: "DeleteReview"
+	)
+	@handler DeleteReview
+	delete /review/:review_id (DeleteReviewReq) returns (DeleteReviewRes)
+
+	@doc(
+		summary: "AddBooking"
+	)
+	@handler AddBooking
+	post /booking (AddBookingReq) returns (AddBookingRes)
+
+	@doc(
+		summary: "GetBooking"
+	)
+	@handler GetBooking
+	get /booking/:booking_id (GetBookingReq) returns (GetBookingRes)
+
+	@doc(
+		summary: "GetBookings"
+	)
+	@handler GetBookings
+	get /booking (GetBookingsReq) returns (GetBookingsRes)
+
+	@doc(
+		summary: "UpdateBooking"
+	)
+	@handler UpdateBooking
+	put /booking/:booking_id (UpdateBookingReq) returns (UpdateBookingRes)
+
+	@doc(
+		summary: "DeleteBooking"
+	)
+	@handler DeleteBooking
+	delete /booking/:booking_id (DeleteBookingReq) returns (DeleteBookingRes)
+
+	@doc(
+		summary: "AddRoom"
+	)
+	@handler AddRoom
+	post /room (AddRoomReq) returns (AddRoomRes)
+
+	@doc(
+		summary: "GetRoom"
+	)
+	@handler GetRoom
+	get /room/:room_id (GetRoomReq) returns (GetRoomRes)
+
+	@doc(
+		summary: "GetRooms"
+	)
+	@handler GetRooms
+	get /room (GetRoomsReq) returns (GetRoomsRes)
+
+	@doc(
+		summary: "UpdateRoom"
+	)
+	@handler UpdateRoom
+	put /room/:room_id (UpdateRoomReq) returns (UpdateRoomRes)
+
+	@doc(
+		summary: "DeleteRoom"
+	)
+	@handler DeleteRoom
+	delete /room/:room_id (DeleteRoomReq) returns (DeleteRoomRes)
+
+	@doc(
+		summary: "UpdatePhotos"
+	)
+	@handler UpdatePhotos
+	put /photos (UpdatePhotosReq) returns (UpdatePhotosRes)
+}
+
+@server (
+	jwt:        Auth
+	prefix:     /hbooking/report
+)
+service hbooking-api {
+
+	@doc(
+		summary: "GetRevenue"
+	)
+	@handler GetRevenue
+	get /revenue (GetRevenueReq) returns (GetRevenueRes)
+}

@@ -1,0 +1,87 @@
+package common
+
+const (
+	SUCCESS_CODE = 0
+	SUCCESS_MESS = "Success"
+
+	UNMARSHAL_ERR_CODE = 1001
+	UNMARSHAL_ERR_MESS = "Unmarshal error"
+
+	OTHER_ERR_CODE = 1002
+	OTHER_ERR_MESS = "Other error"
+
+	INVALID_TOKEN_CODE = 1003
+	INVALID_TOKEN_MESS = "Forbidden access"
+
+	INVALID_REQUEST_CODE = 1004
+	INVALID_REQUEST_MESS = "Invalid request"
+
+	PERMISSION_DENIED_CODE = 1005
+	PERMISSION_DENIED_MESS = "Permission denied"
+
+	DB_ERR_CODE = 1006
+	DB_ERR_MESS = "Database error"
+
+	REQUEST_NOT_SUPPORTED_CODE = 1007
+	REQUEST_NOT_SUPPORTED_MESS = "Request unsupported"
+
+	INVALID_SESSION_CODE = 1008
+	INVALID_SESSION_MESS = "Invalid session"
+
+	STORAGE_ERR_CODE = 1010
+	STORAGE_ERR_MESS = "Storage error"
+
+	VALIDATE_REQUEST_ERR_CODE = 1010
+	VALIDATE_REQUEST_ERR_MESS = "Validate request error"
+
+	INVALID_ENTITY_TYPE_CODE = 1011
+	INVALID_ENTITY_TYPE_MESS = "Invalid entity type"
+)
+
+// user
+const (
+	USER_IS_EXISTED_CODE = 1101
+	USER_IS_EXISTED_MESS = "User is existed"
+
+	USER_IS_NOT_EXISTED_CODE = 1102
+	USER_IS_NOT_EXISTED_MESS = "User is not existed"
+
+	PASSWORD_IS_WRONG_CODE = 1103
+	PASSWORD_IS_WRONG_MESS = "Password is wrong"
+
+	SEND_MAIL_ERR_CODE = 1104
+	SEND_MAIL_ERR_MESS = "Send mail error"
+
+	PASSWORD_IS_INVALID_CODE = 1105
+	PASSWORD_IS_INVALID_MESS = "Password is invalid"
+)
+
+// homestay
+const (
+	HOMESTAY_IS_NOT_EXISTED_CODE = 1201
+	HOMESTAY_IS_NOT_EXISTED_MESS = "Homestay is not existed"
+)
+
+// room
+const (
+	ROOM_IS_NOT_EXISTED_CODE = 1301
+	ROOM_IS_NOT_EXISTED_MESS = "Room is not existed"
+)
+
+// booking
+const (
+	BOOKING_IS_NOT_EXISTED_CODE = 1401
+	BOOKING_IS_NOT_EXISTED_MESS = "Booking is not existed"
+)
+
+// service
+const (
+	SERVICE_IS_NOT_EXISTED_CODE = 1501
+	SERVICE_IS_NOT_EXISTED_MESS = "Service is not existed"
+)
+
+// revenue
+const (
+	REVENUE_IS_NOT_EXISTED_CODE = 1601
+	REVENUE_IS_NOT_EXISTED_MESS = "Revenue is not existed"
+)
