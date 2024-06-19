@@ -17,7 +17,6 @@ import { RESPONSE_CODE } from "@/constants/constants";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore, useLoading } from "@/store";
 import { toast } from "@/shared/components/ui/use-toast";
-import { HOMESTAY_PATHS } from "@/features/homestay";
 import { AUTH_PATHS } from "../constants";
 import { RootPath } from "@/routes";
 

@@ -5,7 +5,7 @@ Auth:
   AccessSecret: xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
   AccessExpire: 604800
   RefreshExpire: 6048000
-DataSource: root:hbooking@tcp(mysql_db:3306)/hbooking
+DataSource: root:123456a@@tcp(0.0.0.0:3306)/hbooking
 SMTPConfig:
   ClientOrigin: http://localhost:8888/hbooking
   # EmailFrom: buiha.dev@gmail.com
@@ -15,12 +15,12 @@ SMTPConfig:
   # SMTPPort: 587
   EmailFrom: admin@hbooking.com
   SMTPHost: sandbox.smtp.mailtrap.io
-  SMTPUser: 72721ec65fcc84
-  SMTPPass: 697ec3311670ae
+  SMTPUser: 1b0eb7d8f5d2f7
+  SMTPPass: a8a894336182f7
   SMTPPort: 587
 CloudinaryConfig:
   # CLOUDINARY_URL=cloudinary://562289264945973:D8205HsFINfISmjm-I_l3gr4E3Q@djyssz3i6
-  CloudName: 'djyssz3i6'
-  APIKey: '562289264945973'   
-  APISecret: 'D8205HsFINfISmjm-I_l3gr4E3Q'
-  StorageUrl: 'https://res.cloudinary.com/djyssz3i6/image/upload'
+  CloudName: 'longduongxx86'
+  APIKey: '738554377165928'   
+  APISecret: '02eTMIf8o5FvBN14W_Z2csK7pdI'
+  StorageUrl: 'https://res.cloudinary.com/longduongxx86'
